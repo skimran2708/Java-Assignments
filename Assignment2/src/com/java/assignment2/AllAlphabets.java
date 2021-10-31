@@ -22,3 +22,6 @@ public class AllAlphabets {
         return true;
     }
 }
+
+// Time Complexity: O(n)    where n is length of the string
+// Space Complexity: O(26)
