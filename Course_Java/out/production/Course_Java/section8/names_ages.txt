@@ -1,0 +1,7 @@
+akhil is 12 years old.
+nikhil is 13 years old.
+ram is 14 years old.
+sham is 15 years old.
+anil is 16 years old.
+ravi is 17 years old.
+kishore is 18 years old.
