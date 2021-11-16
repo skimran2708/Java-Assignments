@@ -7,50 +7,50 @@ import java.util.Date;
 
 public class KycForm {
 
-    private Date regDate;
-    private Date currDate;
+    private Date registrationDate;
+    private Date currentDate;
 
-    private void printRange(Date beforeDate, Date afterDate, Calendar cal, int currYear){
+    private void printRange(Date beforeDate, Date afterDate, Calendar calender, int currentYear){
 
-        String res;
-        String res1;
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        String result1;
+        String result2;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
-        Calendar beforeDateCal = Calendar.getInstance();
-        Calendar regDateCal = Calendar.getInstance();
+        Calendar beforeDateCalender = Calendar.getInstance();
+        Calendar registrationDateCalender = Calendar.getInstance();
 
-        beforeDateCal.setTime(beforeDate);
-        regDateCal.setTime(regDate);
+        beforeDateCalender.setTime(beforeDate);
+        registrationDateCalender.setTime(registrationDate);
 
-        int beforeDateYear = beforeDateCal.get(Calendar.YEAR);
-        int regDateYear = regDateCal.get(Calendar.YEAR);
+        int beforeDateYear = beforeDateCalender.get(Calendar.YEAR);
+        int regDateYear = registrationDateCalender.get(Calendar.YEAR);
 
 
         // this condition is for when current date is falling before 30 days before registration date anniversary.
-        if(currDate.before(beforeDate) || currDate.equals(beforeDate)){
-            if(regDateYear == (beforeDateYear - 1) || regDateYear == currYear){
+        if(currentDate.before(beforeDate) || currentDate.equals(beforeDate)){
+            if(regDateYear == (beforeDateYear - 1) || regDateYear == currentYear){
                 System.out.println("No Range");
                 return;
             }
-            cal.set(Calendar.YEAR, currYear - 1);
-            res = sdf.format(beforeDate);
-            res1 = sdf.format(afterDate);
-            System.out.println(res + " " + res1);
+            calender.set(Calendar.YEAR, currentYear - 1);
+            result1 = simpleDateFormat.format(beforeDate);
+            result2 = simpleDateFormat.format(afterDate);
+            System.out.println(result1 + " " + result2);
         }
 
         // this condition if for when current date is falling after registration but before 30 days after
         // registration date anniversary.
-        else if(currDate.before(afterDate)){
-            res = sdf.format(beforeDate);
-            res1 = sdf.format(currDate);
-            System.out.println(res + " " + res1);
+        else if(currentDate.before(afterDate)){
+            result1 = simpleDateFormat.format(beforeDate);
+            result2 = simpleDateFormat.format(currentDate);
+            System.out.println(result1 + " " + result2);
         }
 
         // this is for when current date is falling after 30 days of registration day anniversary.
         else{
-            res = sdf.format(beforeDate);
-            res1 = sdf.format(afterDate);
-            System.out.println(res + " " + res1);
+            result1 = simpleDateFormat.format(beforeDate);
+            result2 = simpleDateFormat.format(afterDate);
+            System.out.println(result1 + " " + result2);
         }
 
     }
@@ -58,36 +58,36 @@ public class KycForm {
 
     public void dateFormat(String rd, String cd) throws ParseException {
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        Calendar cal = Calendar.getInstance();
-        Calendar cal1 = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Calendar calender = Calendar.getInstance();
+        Calendar calender1 = Calendar.getInstance();
 
-        cal.setTime(sdf.parse(rd));
-        this.regDate = cal.getTime();
+        calender.setTime(simpleDateFormat.parse(rd));
+        this.registrationDate = calender.getTime();
 
-        cal1.setTime(sdf.parse(cd));
-        this.currDate = cal1.getTime();
+        calender1.setTime(simpleDateFormat.parse(cd));
+        this.currentDate = calender1.getTime();
 
-        int currYear = cal1.get(Calendar.YEAR);
+        int currentYear = calender1.get(Calendar.YEAR);
 
         //Base Case : when current date is before 1st anniversary or within same year of sign up.
-        if(cal1.get(Calendar.YEAR) - 1900 == cal.get(Calendar.YEAR) - 1900){
+        if(calender1.get(Calendar.YEAR) - 1900 == calender.get(Calendar.YEAR) - 1900){
             System.out.println("No Range");
             return;
         }
 
-        cal.set(Calendar.YEAR, currYear);
+        calender.set(Calendar.YEAR, currentYear);
 
         // before registration date
-        cal.add(Calendar.DATE, -30);
-        Date beforeDate = cal.getTime();
+        calender.add(Calendar.DATE, -30);
+        Date beforeDate = calender.getTime();
 
 
         // after registration date +30 days
-        cal.add(Calendar.DATE, 60);
-        Date afterDate = cal.getTime();
+        calender.add(Calendar.DATE, 60);
+        Date afterDate = calender.getTime();
 
-        printRange(beforeDate, afterDate, cal, currYear);
+        printRange(beforeDate, afterDate, calender, currentYear);
 
     }
 }
